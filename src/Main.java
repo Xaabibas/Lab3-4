@@ -17,7 +17,7 @@ public class Main {
         MainGroup mg = new MainGroup(start, envelop, kozlik, dunno);
         mg.read();
         mg.hide();
-        JourneyTime journeyTime = new JourneyTime(1, 30);
+        JourneyTime journeyTime = new JourneyTime(2, 30);
         mg.goTo(journeyTime);
     }
 }

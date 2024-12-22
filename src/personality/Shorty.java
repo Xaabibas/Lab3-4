@@ -7,12 +7,12 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class Shorty extends Person {
-    private final int endurance;
+    private int endurance;
     private final ArrayList<Clothes> clothes;
 
     public Shorty(String name, int endurance) {
         super(name);
-        this.endurance = endurance;
+        this.endurance = Math.abs(endurance);
         this.clothes = new ArrayList<>();
     }
 
@@ -34,6 +34,14 @@ public class Shorty extends Person {
 
     public void removeClothes(Clothes... clothes) {
         this.clothes.removeAll(Arrays.asList(clothes));
+    }
+
+    public void changeEndurance(int ch) {
+        if (this.endurance + ch < 0) {
+            this.endurance = 0;
+        } else {
+            this.endurance += ch;
+        }
     }
 
     public int calculatePossibleMinutes() {

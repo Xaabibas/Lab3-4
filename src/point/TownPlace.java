@@ -1,7 +1,9 @@
 package point;
 
 import interfaces.Titlable;
+import personality.Shorty;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class TownPlace extends Place implements Titlable {
@@ -34,6 +36,14 @@ public class TownPlace extends Place implements Titlable {
 
     public int getHouse() {
         return house;
+    }
+
+    @Override
+    public void storm(ArrayList<Shorty> shorties) {
+        System.out.println("Каратышки попали в шторм, но они успели спрятаться в доме, поэтому отделались легким испугом");
+        for (Shorty i : shorties) {
+            i.changeEndurance(-1);
+        }
     }
 
     @Override
