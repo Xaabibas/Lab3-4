@@ -54,7 +54,9 @@ public class Shorty extends Person {
     }
 
     public void dirtySomeClothe() {
-        clothes.get(new Random().nextInt(clothes.size())).dirtyIt();
+        if (!clothes.isEmpty()) {
+            clothes.get(new Random().nextInt(clothes.size())).dirtyIt();
+        }
     }
 
     public ArrayList<Clothes> getClothes() {

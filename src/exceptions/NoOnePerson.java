@@ -1,6 +1,6 @@
 package exceptions;
 
-public class NoOnePerson extends Exception {
+public class NoOnePerson extends RuntimeException {
     public NoOnePerson() {
         super();
     }

@@ -1,3 +1,4 @@
+import exceptions.NoOnePerson;
 import personality.Shorty;
 import point.AnotherPlace;
 import point.Place;
@@ -47,9 +48,16 @@ public class MainGroup {
     }
 
     public void read() {
-        Shorty reader = characters.get(new Random().nextInt(characters.size()));
-        System.out.println(reader.getName() + " поднял конверт и прочитал надпись на нем: " + envelop.title());
-        this.target = envelop.getAddress();
+        try {
+            if (characters.isEmpty()) {
+                throw new NoOnePerson();
+            }
+            Shorty reader = characters.get(new Random().nextInt(characters.size()));
+            System.out.println(reader.getName() + " поднял конверт и прочитал надпись на нем: " + envelop.title());
+            this.target = envelop.getAddress();
+        } catch (NoOnePerson e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void hide() {
@@ -65,8 +73,8 @@ public class MainGroup {
     public void goTo(JourneyTime time) {
         this.currentPlace = new AnotherPlace("Где-то");
         System.out.println("Группа отправилась в " + envelop.getAddress().title());
+        this.setPossibleTime();
         while (time.getCurrentTime() + possibleTime < time.getAllTime()) {
-            this.setPossibleTime();
             time.pass(possibleTime);
             time.addCurrentTime(possibleTime);
             rest();
@@ -78,8 +86,9 @@ public class MainGroup {
                 currentPlace.storm(characters);
                 time.pass(possibleTime);
             }
+            this.setPossibleTime();
         }
-        time.addCurrentTime(time.getAllTime() - time.getCurrentTime());
+        time.pass(time.getAllTime() - time.getCurrentTime());
         System.out.println(time.passedTime() + " группа добралась до цели.");
         this.setCurrentPlace(target);
     }

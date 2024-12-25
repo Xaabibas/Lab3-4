@@ -1,5 +1,6 @@
 package point;
 
+import exceptions.NoClothes;
 import personality.Shorty;
 
 import java.util.ArrayList;
@@ -15,13 +16,18 @@ public class AnotherPlace extends Place{
 
     @Override
     public void storm(ArrayList<Shorty> shorties) {
-        System.out.println("Каратышки попали в шторм!!!");
+        System.out.println("Каратышки попали в шторм!");
         this.setWeather(Weather.RAINY);
         for (Shorty i : shorties) {
-            if (!i.getClothes().isEmpty()) {
+            try {
+                i.changeEndurance(-15);
+                if (i.getClothes().isEmpty()) {
+                    throw new NoClothes();
+                }
                 i.removeClothes(i.getClothes().get(new Random().nextInt()));
+            } catch (NoClothes e) {
+                System.out.println(e.getMessage());
             }
-            i.changeEndurance(-15);
         }
     }
 

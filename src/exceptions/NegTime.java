@@ -1,6 +1,6 @@
 package exceptions;
 
-public class NegTime extends RuntimeException {
+public class NegTime extends Exception {
     public NegTime() {
         super();
     }

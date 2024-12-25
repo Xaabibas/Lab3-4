@@ -1,14 +1,15 @@
 package thing;
 
 public class Clothes extends Thing {
-    private String name;
-
-    public Clothes() {
-        super();
-    }
+    private final String name;
 
     public Clothes(String name) {
         super();
+        this.name = name;
+    }
+
+    public Clothes(String name, boolean dirty) {
+        super(dirty);
         this.name = name;
     }
 

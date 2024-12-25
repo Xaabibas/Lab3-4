@@ -31,7 +31,15 @@ public class JourneyTime {
     }
 
     public void addCurrentTime(int time){
-        this.currentTime += time;
+        try {
+            if (time < 0) {
+                throw new NegTime();
+            }
+            this.currentTime += time;
+        } catch (NegTime e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 
     public int getAllTime(){
@@ -39,6 +47,13 @@ public class JourneyTime {
     }
 
     public void pass(int time){
-        this.nonStopTime += time;
+        try {
+            if (time < 0) {
+                throw new NegTime();
+            }
+            this.nonStopTime += time;
+        } catch (NegTime e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
